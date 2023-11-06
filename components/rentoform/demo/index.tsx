@@ -1,4 +1,5 @@
-import { FormLayout, Slide } from "..";
+import { FormLayout, FormLeftSide, Slide } from "..";
+import { FormRightSide } from "../form-right-side";
 import { rentoformConfig } from "../utils/config";
 import RightDemoForm from "./form";
 import { Suspense } from "react";
@@ -8,20 +9,13 @@ export function DemoForm() {
         <FormLayout
             header={<Header />}
             footer={<Footer />}
-            leftChildren={<LeftSide />}
-            rightChildren={<RightSide />}
             className="py-4 gap-4"
-        />
-    )
-}
-
-
-
-function RightSide() {
-    return (
-        <Suspense fallback={<>Loading...</>}>
+        >
+            <FormLeftSide>
+                <LeftSide />
+            </FormLeftSide>
             <RightDemoForm />
-        </Suspense>
+        </FormLayout>
     )
 }
 

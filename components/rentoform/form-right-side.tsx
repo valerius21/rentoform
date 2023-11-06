@@ -4,36 +4,44 @@ import { ArrowUpIcon, ArrowDownIcon } from "@radix-ui/react-icons"
 import { BaseFormProps, Slide } from "."
 import { Button } from "../ui/button"
 import { findCurrentSection, findSectionsWithIds, useRentoFormAtom } from "./utils/functions"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
+import { useDebounce } from "@uidotdev/usehooks"
+import { useElementScroll } from "./hooks/use-element-scroll"
 
-interface FormRightSideProps extends BaseFormProps {
+interface FormRightSideProps extends BaseFormProps, React.HTMLAttributes<HTMLFormElement> {
     controls?: React.ReactNode
 }
 
-export function FormRightSide({ children, className, controls }: FormRightSideProps) {
+export function FormRightSide({ children, className, controls, ...props }: FormRightSideProps) {
     const { setValue, value: { sections } } = useRentoFormAtom()
+
+    // manage current section for control buttons
+    const ref = useRef<HTMLFormElement>(null)
+    const [scrollState] = useElementScroll(ref)
+    const debounceIntervalMs = 100
+    const debouncedY = useDebounce(scrollState.y, debounceIntervalMs)
     useEffect(() => {
         const currID = findCurrentSection()
         const currSections = findSectionsWithIds()
         setValue(state => ({ ...state, currentSection: currID, sections: currSections }))
-    }, [])
+    }, [debouncedY])
 
     const showControls = sections.length > 1
 
     return (
-        <div className={cn("relative w-full snap-y snap-mandatory overflow-y-scroll", className)}>
+        <form ref={ref} className={cn("relative h-full w-full snap-y snap-mandatory overflow-y-scroll", className)} {...props}>
             {children ?? <Slide id="demo" />}
             {showControls ? <>{controls ?? <DefaultControls />}</> : null}
-        </div>
+        </form>
     )
 }
 
 function DefaultControls() {
     const { nextSection, previousSection } = useRentoFormAtom()
     return (
-        <div className="sticky bottom-0 left-0 shadow-xl z-10 w-full flex flex-row justify-end pr-4 pb-4">
-            <Button variant={'outline'} className="rounded-r-none border-r" onClick={nextSection}><ArrowDownIcon /></Button>
-            <Button variant={'outline'} className="rounded-l-none" onClick={previousSection}><ArrowUpIcon /></Button>
+        <div className="sticky z-10 bottom-0 left-0 shadow-xl w-full flex flex-row justify-end pr-4 pb-4">
+            <Button type='button' variant={'outline'} className="rounded-r-none border-r" onClick={nextSection}><ArrowDownIcon /></Button>
+            <Button type='button' variant={'outline'} className="rounded-l-none" onClick={previousSection}><ArrowUpIcon /></Button>
         </div>
     )
 }

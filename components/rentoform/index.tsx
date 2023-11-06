@@ -16,11 +16,11 @@ export interface FormLayoutProps extends FormBodyProps {
 }
 
 
-export function FormLayout({ className, header, footer, leftChildren, rightChildren }: FormLayoutProps) {
+export function FormLayout({ className, header, footer, children }: FormLayoutProps) {
     return (
         <div className={cn("h-screen w-screen flex flex-col", className)}>
             <FormHeader>{header}</FormHeader>
-            <FormBody leftChildren={leftChildren} rightChildren={rightChildren} />
+            <FormBody>{children}</FormBody>
             <FormFooter>{footer}</FormFooter>
         </div>
     )

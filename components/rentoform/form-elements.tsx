@@ -25,16 +25,14 @@ export function FormFooter({ children, className }: BaseFormProps) {
 }
 
 export interface FormBodyProps extends BaseFormProps {
-    leftChildren?: React.ReactNode
-    rightChildren?: React.ReactNode
+    children?: React.ReactNode
 }
 
-export function FormBody({ className, leftChildren, rightChildren }: FormBodyProps) {
+export function FormBody({ className, children }: FormBodyProps) {
     return (
         <>
             <main className={cn("flex-1 w-full flex flex-row", className)}>
-                <FormLeftSide>{leftChildren}</FormLeftSide>
-                <FormRightSide>{rightChildren}</FormRightSide>
+                {children}
             </main>
         </>
     )

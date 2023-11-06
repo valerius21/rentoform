@@ -5,7 +5,7 @@ export interface CustomSlideProps extends ComponentProps<typeof Slide> { }
 
 export function CustomSlide({ children, ...props }: CustomSlideProps) {
     return (
-        <Slide className="p-8" {...props}>
+        <Slide className="p-8 my-auto" {...props}>
             {children}
         </Slide>
     )
