@@ -18,7 +18,7 @@ interface CustomSlideProps extends ComponentProps<typeof Slide> { }
 
 function CustomSlide({ children, ...props }: CustomSlideProps) {
     return (
-        <Slide className="p-4" {...props}>
+        <Slide className="p-8" {...props}>
             {children}
         </Slide>
     )

@@ -17,6 +17,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "geist": "^1.0.0",
+    "jotai": "^2.5.1",
     "next": "14.0.1",
     "react": "^18",
     "react-dom": "^18",
@@ -24,6 +25,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@swc-jotai/react-refresh": "^0.1.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

@@ -1,11 +1,14 @@
 import { cn } from "@/lib/utils";
-import { BaseFormProps } from ".";
+import { BaseFormProps, idTag } from ".";
 
-export interface SlideProps extends BaseFormProps, React.HTMLAttributes<HTMLDivElement> { }
+export interface SlideProps extends BaseFormProps, React.HTMLAttributes<HTMLDivElement> {
+    id: string
+}
 
-export function Slide({ children, className, ...props }: SlideProps) {
+
+export function Slide({ children, className, id, ...props }: SlideProps) {
     return (
-        <div className={cn("h-full snap-center", className)} {...props}>{children ?? <>Slide</>}</div>
+        <div id={`${idTag}-${id}`} className={cn("h-full snap-center", className)} {...props}>{children ?? <>Slide</>}</div>
     )
 }
 

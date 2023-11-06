@@ -14,6 +14,8 @@ export interface FormLayoutProps extends FormBodyProps {
     header?: React.ReactNode
 }
 
+// prefix for every slide id
+export const idTag = "rentoform-slide"
 
 export function FormLayout({ className, header, footer, leftChildren, rightChildren }: FormLayoutProps) {
     return (
