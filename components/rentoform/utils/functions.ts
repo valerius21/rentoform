@@ -1,5 +1,5 @@
 import { atom, useAtom } from "jotai";
-import { idTag } from ".";
+import { idTag } from "./config";
 
 export function scrollToSection(section: string) {
     const sectionElement = document.getElementById(section);

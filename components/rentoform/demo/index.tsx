@@ -1,6 +1,7 @@
-import { rentoformConfig } from "@/lib/utils";
-import { FormLayout, Slide } from ".";
-import { ComponentProps } from "react";
+import { FormLayout, Slide } from "..";
+import { rentoformConfig } from "../utils/config";
+import RightDemoForm from "./form";
+import { Suspense } from "react";
 
 export function DemoForm() {
     return (
@@ -14,24 +15,13 @@ export function DemoForm() {
     )
 }
 
-interface CustomSlideProps extends ComponentProps<typeof Slide> { }
 
-function CustomSlide({ children, ...props }: CustomSlideProps) {
-    return (
-        <Slide className="p-8" {...props}>
-            {children}
-        </Slide>
-    )
-}
 
 function RightSide() {
     return (
-        <>
-            <CustomSlide id="sec-1">Slide #1</CustomSlide>
-            <CustomSlide id="sec-2">Slide #2</CustomSlide>
-            <CustomSlide id="sec-3">Slide #3</CustomSlide>
-            <CustomSlide id="sec-4">Slide #4</CustomSlide>
-        </>
+        <Suspense fallback={<>Loading...</>}>
+            <RightDemoForm />
+        </Suspense>
     )
 }
 

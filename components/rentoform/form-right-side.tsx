@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils"
 import { ArrowUpIcon, ArrowDownIcon } from "@radix-ui/react-icons"
 import { BaseFormProps, Slide } from "."
 import { Button } from "../ui/button"
-import { findCurrentSection, findSectionsWithIds, useRentoFormAtom } from "./functions"
+import { findCurrentSection, findSectionsWithIds, useRentoFormAtom } from "./utils/functions"
 import { useEffect } from "react"
 
 interface FormRightSideProps extends BaseFormProps {

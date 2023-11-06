@@ -1,5 +1,6 @@
-import { RentformConfig, cn } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import { FormHeader, FormBody, FormFooter, FormBodyProps } from "./form-elements"
+import { RentformConfig } from "./utils/config"
 
 export * from './form-elements'
 export * from './form-slide'
@@ -14,8 +15,6 @@ export interface FormLayoutProps extends FormBodyProps {
     header?: React.ReactNode
 }
 
-// prefix for every slide id
-export const idTag = "rentoform-slide"
 
 export function FormLayout({ className, header, footer, leftChildren, rightChildren }: FormLayoutProps) {
     return (
