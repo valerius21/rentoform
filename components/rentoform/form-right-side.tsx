@@ -13,16 +13,19 @@ interface FormRightSideProps extends BaseFormProps, React.HTMLAttributes<HTMLFor
 }
 
 export function FormRightSide({ children, className, controls, ...props }: FormRightSideProps) {
-    const { setValue, value: { sections } } = useRentoFormAtom()
+    const { setValue, value: { sections, currentSection } } = useRentoFormAtom()
 
     // manage current section for control buttons
     const ref = useRef<HTMLFormElement>(null)
-    const [scrollState] = useElementScroll(ref)
+    const [scrollState, _] = useElementScroll(ref)
     const debounceIntervalMs = 100
-    const debouncedY = useDebounce(scrollState.y, debounceIntervalMs)
+    const debouncedY = useDebounce(scrollState, debounceIntervalMs)
     useEffect(() => {
         const currID = findCurrentSection()
         const currSections = findSectionsWithIds()
+        if (currID === currentSection) return
+
+        // update sections
         setValue(state => ({ ...state, currentSection: currID, sections: currSections }))
     }, [debouncedY])
 

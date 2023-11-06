@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-export function useElementScroll(elementRef: any) {
-    const [state, setState] = useState({ x: null, y: null });
+export function useElementScroll(elementRef: React.RefObject<HTMLFormElement | null>) {
+    const [state, setState] = useState<{ x: number | null, y: number | null }>({ x: null, y: null });
 
     useEffect(() => {
         const element = elementRef.current;
@@ -20,5 +20,5 @@ export function useElementScroll(elementRef: any) {
         }
     }, [elementRef]);
 
-    return [state];
+    return [state, setState];
 }
